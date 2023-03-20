@@ -1,12 +1,15 @@
 import React from "react";
 
-const Listing = (yogesh) => {
+const Listing = (props) => {
   return (
     <div>
-      <h1>{yogesh.list.title}</h1>
-      {/* <p>{yogesh.list.description}</p> */}
+      <h1>{props.list.title}</h1>
+      <p>{props.list.completed.toString()}</p>
     </div>
   );
 };
+
+
+
 
 export default Listing;

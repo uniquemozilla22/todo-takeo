@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Listing from "./Components/List.comp.js";
-
+import axios from "axios";
 const MockData = require("./data.json");
 
 // requirements
@@ -14,35 +14,39 @@ const MockData = require("./data.json");
  *
  */
 
-function App(props) {
+function App() {
   const [data, setData] = useState(null);
+  const [count, setCount] = useState(0);
 
   const fetchData = async () => {
-    let dataFetch = await fetch("https://jsonplaceholder.typicode.com/todos");
-    dataFetch = await dataFetch.json();
-    console.log(dataFetch);
-    setData(dataFetch);
+    // fetch Function
+    // let dataFetch = await fetch("https://jsonplaceholder.typicode.com/todos");
+    // dataFetch = await dataFetch.json();
+
+    // axios fetch
+    let dataFetch = await axios.get(
+      "https://jsonplaceholder.typicode.com/todos"
+    );
+
+    console.log(dataFetch.data);
+    setData(dataFetch.data);
   };
+
+  // Hint use useEffect
+
+  // useEffect(() => {
+  //   fetchData();
+  // }, []);
+
+  console.log("count:" + count);
 
   const listing = () => {
     if (!data) return <h1>Loading...</h1>;
 
     return data.map((listingdata, index) => {
-      return <Listing list={listingdata} />;
+      return <Listing key={index} list={listingdata} />;
     });
   };
-
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     setData(MockData);
-  //   }, 1000);
-  // });
-
-  // HTML tags
-  // <div></div>
-  // <h1></h1>
-
-  // JSX Tags are defined by you specially
 
   return (
     <div className="App">
