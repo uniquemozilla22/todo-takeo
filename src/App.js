@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Listing from "./Components/List.comp.js";
 import axios from "axios";
-const MockData = require("./data.json");
+import { InputComponent } from "./Components/Input.comp.js";
+import { BoxTodoContainer } from "./styled/styled";
 
 // requirements
 
@@ -15,44 +16,25 @@ const MockData = require("./data.json");
  */
 
 function App() {
-  const [data, setData] = useState(null);
+  const [data, setData] = useState([
+    {
+      id: 1,
+      title: "Task 1",
+      completed: false,
+    },
+    {
+      id: 2,
+      title: "Task 2",
+      completed: true,
+    },
+  ]);
   const [count, setCount] = useState(0);
-
-  const fetchData = async () => {
-    // fetch Function
-    // let dataFetch = await fetch("https://jsonplaceholder.typicode.com/todos");
-    // dataFetch = await dataFetch.json();
-
-    // axios fetch
-    let dataFetch = await axios.get(
-      "https://jsonplaceholder.typicode.com/todos"
-    );
-
-    console.log(dataFetch.data);
-    setData(dataFetch.data);
-  };
-
-  // Hint use useEffect
-
-  // useEffect(() => {
-  //   fetchData();
-  // }, []);
-
-  console.log("count:" + count);
-
-  const listing = () => {
-    if (!data) return <h1>Loading...</h1>;
-
-    return data.map((listingdata, index) => {
-      return <Listing key={index} list={listingdata} />;
-    });
-  };
-
   return (
-    <div className="App">
-      <button onClick={() => fetchData()}>Fetch Data</button>
-      {listing()}
-    </div>
+    <BoxTodoContainer>
+      <InputComponent />
+      <Listing title={"Task 1"} completed={false} />
+      <Listing title={"Task 2"} completed={true} />
+    </BoxTodoContainer>
   );
 }
 
