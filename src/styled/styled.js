@@ -1,5 +1,7 @@
 import styled from "@emotion/styled";
 
+// THis is the concept of "styled-comnponent"
+
 export const BoxTodoContainer = styled.div`
   display: flex;
   flex-direction: column;

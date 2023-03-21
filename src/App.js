@@ -3,23 +3,15 @@ import Listing from "./Components/List.comp.js";
 import axios from "axios";
 import { InputComponent } from "./Components/Input.comp.js";
 import { BoxTodoContainer } from "./styled/styled";
+import MockData from "./data.json";
 
 // requirements
-
-/**
- *
- * 1. looking at the different api calls that we can make
- * 2. what kind of library are there to fetch the data
- * 3. fetching a data and showing it into the console
- * 4. we will be looking at managing states through redux (bonus)
- *
- */
 
 function App() {
   const [data, setData] = useState([
     {
       id: 1,
-      title: "Task 1",
+      title: "Task 2",
       completed: false,
     },
     {
@@ -29,13 +21,32 @@ function App() {
     },
   ]);
   const [count, setCount] = useState(0);
+
   return (
     <BoxTodoContainer>
       <InputComponent />
-      <Listing title={"Task 1"} completed={false} />
-      <Listing title={"Task 2"} completed={true} />
+      {data.map((task, index) => {
+        return (
+          <Listing key={index} title={task.title} completed={task.completed} />
+        );
+      })}
     </BoxTodoContainer>
   );
 }
+let array_of_data = [1, 2, 3, 4, 5, 6, 7];
+
+console.log(array_of_data);
+
+// for loop implementation
+// for (let i = 0; i < array_of_data.length; i++) {
+//   array_of_data[i] += 2;
+// }
+
+const updated_array = array_of_data.map((item, index) => {
+  item = item + 2;
+  return item;
+});
+
+console.log(updated_array);
 
 export default App;
