@@ -11,7 +11,7 @@ function App() {
   const [data, setData] = useState([
     {
       id: 1,
-      title: "Task 2",
+      title: "Task 1",
       completed: false,
     },
     {
@@ -21,6 +21,41 @@ function App() {
     },
   ]);
   const [count, setCount] = useState(0);
+
+  const addData = (id, title) => {
+    const newData = {
+      id: id,
+      title: title,
+      completed: false,
+    };
+    // let newDataArr = data.push(newData);
+    // setData(newDataArr);
+
+    setData([...data, newData]);
+  };
+
+  const deleteData = (id) => {
+    let copyData = data;
+
+    //delete copyData[index];
+    let filteredData = copyData.filter((dataTask) => dataTask.id !== id);
+
+    console.group(filteredData);
+
+    setData([...filteredData]);
+  };
+
+  const completeTask = (id) => {
+    let copyData = data;
+    let indexOfTaskToBeCompleted = copyData.findIndex((task) => task.id === id);
+    copyData[indexOfTaskToBeCompleted].completed = true;
+  };
+
+  const setTaskUnCompleted = (id) => {};
+
+  // useEffect(() => {
+  //   deleteData(2);
+  // }, []);
 
   return (
     <BoxTodoContainer>
@@ -33,20 +68,5 @@ function App() {
     </BoxTodoContainer>
   );
 }
-let array_of_data = [1, 2, 3, 4, 5, 6, 7];
-
-console.log(array_of_data);
-
-// for loop implementation
-// for (let i = 0; i < array_of_data.length; i++) {
-//   array_of_data[i] += 2;
-// }
-
-const updated_array = array_of_data.map((item, index) => {
-  item = item + 2;
-  return item;
-});
-
-console.log(updated_array);
 
 export default App;
