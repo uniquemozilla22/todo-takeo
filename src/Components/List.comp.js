@@ -9,10 +9,10 @@ const Listing = (props) => {
       <h1>{props.title}</h1>
       <IconContainer>
         <Button variant="text">
-          <CheckBox />
+          <CheckBox onClick={() => props.onComplete()} />
         </Button>
         <Button variant="text">
-          <DeleteOutlined />
+          <DeleteOutlined onClick={() => props.onDelete()} />
         </Button>
       </IconContainer>
     </ListingContainer>

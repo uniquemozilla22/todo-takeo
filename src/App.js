@@ -22,47 +22,57 @@ function App() {
   ]);
   const [count, setCount] = useState(0);
 
-  const addData = (id, title) => {
+  const addData = (title) => {
     const newData = {
-      id: id,
+      id: data.length + 1,
       title: title,
       completed: false,
     };
     // let newDataArr = data.push(newData);
     // setData(newDataArr);
 
+    console.log(newData);
     setData([...data, newData]);
   };
 
   const deleteData = (id) => {
     let copyData = data;
-
-    //delete copyData[index];
     let filteredData = copyData.filter((dataTask) => dataTask.id !== id);
-
-    console.group(filteredData);
-
     setData([...filteredData]);
   };
 
   const completeTask = (id) => {
     let copyData = data;
     let indexOfTaskToBeCompleted = copyData.findIndex((task) => task.id === id);
-    copyData[indexOfTaskToBeCompleted].completed = true;
+    copyData[indexOfTaskToBeCompleted].completed =
+      !copyData[indexOfTaskToBeCompleted].completed;
+    setData([...copyData]);
   };
 
-  const setTaskUnCompleted = (id) => {};
+  // const setTaskUnCompleted = (id) => {
+  //   let copyData = data;
+  //   let indexOfTaskToBeCompleted = copyData.findIndex((task) => task.id === id);
+  //   copyData[indexOfTaskToBeCompleted].completed = false;
+  //   setData([...copyData]);
+  // };
 
   // useEffect(() => {
-  //   deleteData(2);
+  //   addData(14, "task 3");
   // }, []);
+  // console.log(data);
 
   return (
     <BoxTodoContainer>
-      <InputComponent />
+      <InputComponent addData={addData} />
       {data.map((task, index) => {
         return (
-          <Listing key={index} title={task.title} completed={task.completed} />
+          <Listing
+            key={index}
+            title={task.title}
+            completed={task.completed}
+            onDelete={() => deleteData(task.id)}
+            onComplete={() => completeTask(task.id)}
+          />
         );
       })}
     </BoxTodoContainer>
