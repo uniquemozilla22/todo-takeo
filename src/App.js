@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Listing from "./Components/List.comp.js";
-import axios from "axios";
+// import axios from "axios";
 import { InputComponent } from "./Components/Input.comp.js";
 import { BoxTodoContainer } from "./styled/styled";
 import MockData from "./data.json";
@@ -8,19 +8,7 @@ import MockData from "./data.json";
 // requirements
 
 function App() {
-  const [data, setData] = useState([
-    {
-      id: 1,
-      title: "Task 1",
-      completed: false,
-    },
-    {
-      id: 2,
-      title: "Task 2",
-      completed: true,
-    },
-  ]);
-  const [count, setCount] = useState(0);
+  const [data, setData] = useState(MockData);
 
   const addData = (title) => {
     const newData = {
@@ -28,9 +16,6 @@ function App() {
       title: title,
       completed: false,
     };
-    // let newDataArr = data.push(newData);
-    // setData(newDataArr);
-
     console.log(newData);
     setData([...data, newData]);
   };
@@ -48,18 +33,6 @@ function App() {
       !copyData[indexOfTaskToBeCompleted].completed;
     setData([...copyData]);
   };
-
-  // const setTaskUnCompleted = (id) => {
-  //   let copyData = data;
-  //   let indexOfTaskToBeCompleted = copyData.findIndex((task) => task.id === id);
-  //   copyData[indexOfTaskToBeCompleted].completed = false;
-  //   setData([...copyData]);
-  // };
-
-  // useEffect(() => {
-  //   addData(14, "task 3");
-  // }, []);
-  // console.log(data);
 
   return (
     <BoxTodoContainer>
