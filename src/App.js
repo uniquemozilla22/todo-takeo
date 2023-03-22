@@ -4,6 +4,8 @@ import Listing from "./Components/List.comp.js";
 import { InputComponent } from "./Components/Input.comp.js";
 import { BoxTodoContainer } from "./styled/styled";
 import MockData from "./data.json";
+import ListDetail from "./Components/ListDetail.comp.js";
+import { Route, Routes } from "react-router-dom";
 
 // requirements
 
@@ -34,20 +36,34 @@ function App() {
     setData([...copyData]);
   };
 
+  const listing = () =>
+    data.map((task, index) => {
+      return (
+        <Listing
+          key={index}
+          title={task.title}
+          completed={task.completed}
+          onDelete={() => deleteData(task.id)}
+          onComplete={() => completeTask(task.id)}
+        />
+      );
+    });
+
   return (
     <BoxTodoContainer>
-      <InputComponent addData={addData} />
-      {data.map((task, index) => {
-        return (
-          <Listing
-            key={index}
-            title={task.title}
-            completed={task.completed}
-            onDelete={() => deleteData(task.id)}
-            onComplete={() => completeTask(task.id)}
-          />
-        );
-      })}
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <>
+              <InputComponent addData={addData} />
+              {listing()}
+            </>
+          }
+        />
+        <Route path="/detail" element={}/>
+      </Routes>
+      {/* // <ListDetail {...data[0]} /> */}
     </BoxTodoContainer>
   );
 }
