@@ -5,7 +5,7 @@ import { InputComponent } from "./Components/Input.comp.js";
 import { BoxTodoContainer } from "./styled/styled";
 import MockData from "./data.json";
 import ListDetail from "./Components/ListDetail.comp.js";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Link } from "react-router-dom";
 
 // requirements
 
@@ -51,6 +51,10 @@ function App() {
 
   return (
     <BoxTodoContainer>
+      <ul>
+        <Link to={"."}>Home</Link>
+        <Link to={"/detail"}>Detail</Link>
+      </ul>
       <Routes>
         <Route
           path="/"
@@ -61,9 +65,8 @@ function App() {
             </>
           }
         />
-        <Route path="/detail" element={}/>
+        <Route path="/detail" element={<ListDetail {...data[0]} />} />
       </Routes>
-      {/* // <ListDetail {...data[0]} /> */}
     </BoxTodoContainer>
   );
 }
