@@ -19,7 +19,7 @@ export const InputContainer = styled.form`
   justify-content: center;
 `;
 
-export const ListingContainer = styled(Link)((props) => ({
+export const ListingContainer = styled("div")((props) => ({
   background: props.completed ? "green" : "red",
   margin: "1rem",
   width: "100%",
@@ -27,6 +27,14 @@ export const ListingContainer = styled(Link)((props) => ({
   display: "flex",
   justifyContent: "space-around",
   alignItems: "center",
+  "& h1": {
+    cursor: "pointer",
+  },
+  "&:hover": {
+    boxShadow: "4px 0  10px #2b2b2b80",
+
+    color: "white",
+  },
 }));
 
 export const IconContainer = styled.div(() => ({

@@ -39,10 +39,9 @@ function App() {
       return (
         <Listing
           key={index}
-          title={task.title}
-          completed={task.completed}
           onDelete={() => deleteData(task.id)}
           onComplete={() => completeTask(task.id)}
+          {...task}
         />
       );
     });
@@ -64,7 +63,7 @@ function App() {
             </>
           }
         />
-        <Route path="/detail" element={<ListDetail {...data[0]} />} />
+        <Route path="/detail" Component={ListDetail} />
         <Route
           path="/hi"
           element={
