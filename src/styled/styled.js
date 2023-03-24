@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-
+import { Link } from "react-router-dom";
 // THis is the concept of "styled-comnponent"
 
 export const BoxTodoContainer = styled.div`
@@ -19,7 +19,7 @@ export const InputContainer = styled.form`
   justify-content: center;
 `;
 
-export const ListingContainer = styled.div((props) => ({
+export const ListingContainer = styled(Link)((props) => ({
   background: props.completed ? "green" : "red",
   margin: "1rem",
   width: "100%",
