@@ -7,8 +7,6 @@ import MockData from "./data.json";
 import ListDetail from "./Components/ListDetail.comp.js";
 import { Route, Routes, Link } from "react-router-dom";
 
-// requirements
-
 function App() {
   const [data, setData] = useState(MockData);
 
@@ -54,6 +52,7 @@ function App() {
       <ul>
         <Link to={"."}>Home</Link>
         <Link to={"/detail"}>Detail</Link>
+        <Link to={"/hi"}>Hi</Link>
       </ul>
       <Routes>
         <Route
@@ -66,6 +65,14 @@ function App() {
           }
         />
         <Route path="/detail" element={<ListDetail {...data[0]} />} />
+        <Route
+          path="/hi"
+          element={
+            <>
+              <h1>Hi</h1>
+            </>
+          }
+        />
       </Routes>
     </BoxTodoContainer>
   );
