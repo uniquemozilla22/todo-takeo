@@ -1,0 +1,18 @@
+{
+  "name": "todo-bakend",
+  "version": "1.0.0",
+  "description": "This is the todo backend of Node (Express) to learn",
+  "main": "server.js",
+  "scripts": {
+    "serverstart": "nodemon server.js"
+  },
+  "keywords": [
+    "todo",
+    "list"
+  ],
+  "author": "Takeo",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+  }
+}
