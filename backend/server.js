@@ -1,10 +1,13 @@
 const express = require("express");
+const TodoRouter = require("./todo");
 
 const app = express();
 
-app.use("/", (req, res) => {
-  res.send({ status: 300, message: "Hello! This is the api." });
-});
+app.use("/todo", TodoRouter);
+
+// ------------Task_____________
+// Create a /hello router
+//  - get of /world that will respond me "hello"
 
 const port = process.env.PORT || 3000;
 
