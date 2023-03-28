@@ -1,13 +1,14 @@
 const express = require("express");
+const connect_to_database = require("./database_connection");
 const TodoRouter = require("./todo");
-
 const app = express();
 
-app.use("/todo", TodoRouter);
+// This is used for importing value of the variables from .env file
+require("dotenv").config();
 
-// ------------Task_____________
-// Create a /hello router
-//  - get of /world that will respond me "hello"
+connect_to_database();
+
+app.use("/todo", TodoRouter);
 
 const port = process.env.PORT || 3000;
 
