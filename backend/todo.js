@@ -23,15 +23,6 @@ const data = [
 
 const TodoRouter = express.Router();
 
-const middleware = (req, res, next) => {
-  console.log("Hello I am Middleware 1 ");
-  next();
-};
-const middleware2 = (req, res, next) => {
-  console.log("Hello I am Middleware 2 ");
-  next();
-};
-
 const returnData = (req, res) => {
   console.log("Hey I am called");
   res.send(data);
