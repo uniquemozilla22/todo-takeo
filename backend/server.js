@@ -1,12 +1,15 @@
 import express from "express";
-import connect_to_database from "./database/database_connection";
-import TodoRouter from "./todo";
+import { connectDatabase } from "./database/database_connection.js";
+import TodoRouter from "./routes/Todo/todo.route.js";
+import dotenv from "dotenv";
+
+// Application Started
 const app = express();
 
 // This is used for importing value of the variables from .env file
-require("dotenv").config();
+dotenv.config();
 
-connect_to_database();
+connectDatabase();
 
 app.use("/todo", TodoRouter);
 

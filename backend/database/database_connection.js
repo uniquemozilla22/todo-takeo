@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const connect_to_database = async () => {
+export const connectDatabase = async () => {
   const connection = await mongoose.connect(
     `mongodb+srv://${process.env.DATABASE_USERNAME}:${process.env.DATABASE_PASSWORD}@${process.env.DATABASE_CLUSTER_NAME}.mongodb.net/?retryWrites=true&w=majority`
   );
@@ -10,5 +10,3 @@ const connect_to_database = async () => {
     console.log("databasse not connected");
   }
 };
-
-export default connect_to_database;
