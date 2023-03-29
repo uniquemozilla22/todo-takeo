@@ -1,11 +1,20 @@
-// Create a Schema for todo according to the data below
-/**
- * 
- * 
- *  {
-    id: 3,
-    title: "Task 3",
-    description: "this is the main task 3",
-    completed: true,
+import { Schema, model } from "mongoose";
+
+const TodoSchema = new Schema({
+  title: {
+    type: String,
+    required: true,
   },
- */
+  description: {
+    type: String,
+    required: false,
+  },
+  completed: {
+    type: Boolean,
+    required: true,
+  },
+});
+
+const Todos = model("todos", TodoSchema);
+
+export default Todos;
