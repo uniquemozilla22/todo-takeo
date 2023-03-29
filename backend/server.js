@@ -1,5 +1,5 @@
 import express from "express";
-import { connectDatabase } from "./database/database_connection.js";
+import connectDatabase from "./database/database_connection.js";
 import TodoRouter from "./routes/Todo/todo.route.js";
 import dotenv from "dotenv";
 
@@ -13,7 +13,7 @@ connectDatabase();
 
 app.use("/todo", TodoRouter);
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8000;
 
 app.listen(port, () => {
   console.log(`server running ${port}`);
