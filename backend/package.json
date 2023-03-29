@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "description": "This is the todo backend of Node (Express) to learn",
   "main": "server.js",
+  "type": "module",
   "scripts": {
-    "serverstart": "nodemon server.js"
+    "start": "nodemon server.js"
   },
   "keywords": [
     "todo",

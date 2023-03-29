@@ -1,4 +1,4 @@
-const express = require("express");
+import express from "express";
 
 const data = [
   {
@@ -39,4 +39,4 @@ const returnData = (req, res) => {
 
 TodoRouter.get("/getdata", middleware, middleware2, returnData);
 
-module.exports = TodoRouter;
+export default TodoRouter;

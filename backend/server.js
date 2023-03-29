@@ -1,6 +1,6 @@
-const express = require("express");
-const connect_to_database = require("./database_connection");
-const TodoRouter = require("./todo");
+import express from "express";
+import connect_to_database from "./database/database_connection";
+import TodoRouter from "./todo";
 const app = express();
 
 // This is used for importing value of the variables from .env file
