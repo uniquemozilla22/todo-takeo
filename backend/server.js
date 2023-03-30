@@ -30,6 +30,16 @@ connectDatabase();
 app.use("/todo", TodoRouter);
 app.use("/login", LoginRotuer);
 
+/**
+ *
+ * Create a route to register the user with username and password
+ * also it should check for the existance of the user in the database,
+ *
+ * 
+//  * Create a frontend for that route and make sure that the 
+    registration is working from the frontend to the backend
+ */
+
 const port = process.env.PORT || 8000;
 
 app.listen(port, () => {
