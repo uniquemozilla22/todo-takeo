@@ -61,7 +61,6 @@ function App() {
           <Navi>
             <ul className="">
               <li>
-                {" "}
                 <Link to={"."}>Home</Link>
               </li>
               {/* <li>

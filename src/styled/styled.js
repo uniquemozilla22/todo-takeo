@@ -62,7 +62,7 @@ export const FormWrapper = styled.div(() => ({
     "& a": {
       textDecoration: "none",
       fontSize: "1rem",
-      color: "#448bfe",
+      color: "#2F99FF",
       display: "inline-block",
 
       "&::after": {
