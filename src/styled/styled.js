@@ -1,8 +1,9 @@
 import styled from "@emotion/styled";
 import { Link } from "react-router-dom";
+import { Layout } from "../Components/Layout";
 // THis is the concept of "styled-comnponent"
 
-export const BoxTodoContainer = styled.div`
+export const BoxTodoContainer = styled("div")`
   display: flex;
   flex-direction: column;
   width: 50%;

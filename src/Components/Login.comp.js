@@ -1,7 +1,8 @@
-import { Button, TextField } from "@mui/material";
+import { Alert, Button, TextField } from "@mui/material";
 import styled from "@emotion/styled";
 import React, { useState } from "react";
 import axiosBase from "./../axiosBase.js";
+import { Layout } from "./Layout.js";
 
 const LoginComponent = () => {
   const [username, setUsername] = useState("");
@@ -17,23 +18,24 @@ const LoginComponent = () => {
       username,
       password,
     });
-    console.log(data);
-    alert(data.message);
   };
 
   return (
-    <Container onSubmit={handleSubmit}>
-      <h1>Login</h1>
-      <TextField
-        placeholder="Username"
-        onChange={(e) => setUsername(e.target.value)}
-      />
-      <TextField
-        placeholder="password"
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <Button type="submit">Submit</Button>
-    </Container>
+    <Layout>
+      <Container onSubmit={handleSubmit}>
+        <Alert />
+        <h1>Login</h1>
+        <TextField
+          placeholder="Username"
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        <TextField
+          placeholder="password"
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <Button type="submit">Submit</Button>
+      </Container>
+    </Layout>
   );
 };
 
