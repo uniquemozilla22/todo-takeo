@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import LoginRotuer from "./routes/Authentication/Login.route.js";
 import cors from "cors";
 import bodyParser from "body-parser";
+import RegisterRotuer from "./routes/Authentication/Register.route.js";
 
 // Application Started
 const app = express();
@@ -29,6 +30,7 @@ connectDatabase();
 
 app.use("/todo", TodoRouter);
 app.use("/login", LoginRotuer);
+app.use("/register", RegisterRotuer);
 
 /**
  *
