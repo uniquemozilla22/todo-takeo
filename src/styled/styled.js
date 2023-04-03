@@ -5,36 +5,84 @@ import styled from "@emotion/styled";
 export const BoxTodoContainer = styled.div`
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  background: linear-gradient(
-    90deg,
-    rgba(39, 116, 255, 1) 0%,
-    rgba(179, 39, 252, 1) 100%
-  );
   align-items: center;
   justify-content: center;
+  margin-top: 6.5rem;
 `;
 
-export const InputContainer = styled.form`
-  display: flex;
-  justify-content: center;
-`;
-
-export const ListingContainer = styled("div")((props) => ({
-  background: props.completed ? "green" : "red",
-  margin: "1rem",
-  width: "100%",
+// export const InputContainer = styled.form`
+//   display: flex;
+//   justify-content: space-between;
+//   background: white;
+// `;
+export const InputContainer = styled("form")(() => ({
+  display: "flex",
+  gap: "1rem",
   padding: "1rem",
+  alignItems: "center",
+  flexDirection: "column",
+  "& h2": {
+    fontWeight: "600",
+    fontSize: "2rem",
+    color: "#353535",
+  },
+}));
+export const ListingContainer = styled("div")((props) => ({
+  background: props.completed ? "#48BF53" : "#FF5252",
+  margin: "1rem 0",
+  width: "100%",
+  padding: "1rem 0 ",
   display: "flex",
   justifyContent: "space-around",
   alignItems: "center",
-  "& h1": {
+  borderRadius: "0.5rem",
+  "& h2": {
     cursor: "pointer",
+    paddingLeft: "0.5rem",
   },
   "&:hover": {
     boxShadow: "4px 0  10px #2b2b2b80",
 
     color: "white",
+  },
+  "& svg": {
+    color: props.completed ? "white" : "red",
+    "&:hover": {
+      color: "red",
+    },
+  },
+}));
+
+export const ListingWrap = styled("div")(() => ({
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  alignItems: "center",
+  background: "white",
+  flexWrap: "wrap",
+  minWidth: "25rem",
+  padding: "1rem",
+
+  borderRadius: "0.5rem",
+  boxShadow: "0 2px 3px rgba(0, 0, 0, 0.3)",
+}));
+
+export const FieldsetWrapper = styled("fieldset")(() => ({
+  display: "flex",
+  border: "none",
+  "& button": {
+    background:
+      "linear-gradient(90deg, rgba(39,159,255,1) 0%, rgba(207,39,252,1) 96%)",
+    fontWeight: "400",
+    color: "#ffffff",
+    border: "none",
+    borderRadius: "0",
+    padding: "0 1.75rem",
+    "&:hover": {
+      border: "none",
+      background:
+        "radial-gradient(circle, rgba(39,159,255,1) 0%, rgba(207,39,252,1) 100%)",
+    },
   },
 }));
 
@@ -109,7 +157,15 @@ export const Navi = styled("nav")(() => ({
   justifyContent: "center",
   alignItems: "center",
 
+  position: "fixed",
+  width: "100%",
+  zIndex: "999",
   height: "5rem",
+  background: "rgba( 255, 255, 255, 0.15 )",
+  boxShadow: "0 8px 32px 0 rgba( 31, 38, 135, 0.37)",
+  backgropFilter: "blur( 20px )",
+  top: "0",
+  left: "0",
   "& ul": {
     display: "flex",
     listStyle: "none",
@@ -129,4 +185,15 @@ export const Navi = styled("nav")(() => ({
       },
     },
   },
+}));
+
+export const DetailsContainer = styled.div(() => ({
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  flexDirection: "column",
+  background: "#ffffff",
+  padding: "1rem",
+  borderRadius: "0.5rem",
+  minWidth: "25rem",
 }));

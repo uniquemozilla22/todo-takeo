@@ -7,8 +7,6 @@ import { IconContainer, ListingContainer } from "./../styled/styled";
 const Listing = (props) => {
   const navigate = useNavigate();
 
-  console.log(props);
-
   const navigateToDetail = (e) => {
     navigate("/detail", {
       state: {
@@ -20,15 +18,15 @@ const Listing = (props) => {
   };
 
   return (
-    <ListingContainer completed={props.completed}>
-      <h1 onClick={(e) => navigateToDetail(e)}>{props.title}</h1>
-      <h1>hi</h1>
+    <ListingContainer completed={props.completed} key={props.id}>
+      <h2 onClick={(e) => navigateToDetail(e)}>{props.title}</h2>
+
       <IconContainer>
         <Button variant="text">
           <CheckBox onClick={() => props.onComplete()} />
         </Button>
         <Button variant="text">
-          <DeleteOutlined onClick={() => props.onDelete()} />
+          <DeleteOutlined onClick={() => props.onOpen()} />
         </Button>
       </IconContainer>
     </ListingContainer>
