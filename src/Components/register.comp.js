@@ -3,13 +3,15 @@ import { useEffect, useState } from "react";
 import { Form, Link } from "react-router-dom";
 import axiosBase from "../axiosBase";
 import { FormInner, FormWrapper, Headings } from "../styled/styled";
+import { useSelector } from "react-redux";
 
 const RegisterForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
-
+  const token = useSelector((state) => state.users);
+  console.log(token);
   const handleSubmit = async (e) => {
     e.preventDefault();
     await registerUser(username, password);

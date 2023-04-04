@@ -5,7 +5,7 @@ import { InputComponent } from "./Components/Input.comp.js";
 import { BoxTodoContainer, ListingWrap, MainRoot, Navi } from "./styled/styled";
 import MockData from "./data.json";
 import ListDetail from "./Components/ListDetail.comp.js";
-import { Route, Routes, Link } from "react-router-dom";
+import { Route, Routes, Link, Navigate } from "react-router-dom";
 import LoginForm from "./Components/login.comp.js";
 // import { createTheme, ThemeProvider, Typography } from "@mui/material";
 
@@ -13,12 +13,15 @@ import RegisterForm from "./Components/register.comp.js";
 import { Global } from "@emotion/react";
 import { Dialog } from "@mui/material";
 import Confirmation from "./Components/Dialog.comp.js";
+import { useSelector } from "react-redux";
+import ProtectedPage from "./Components/restricted.comp.js";
 
 function App() {
   const [data, setData] = useState(MockData);
   const [header, setHeader] = useState("header");
   const [open, setOpen] = useState(false);
   const [id, setId] = useState("");
+  const isLoggedIn = useSelector((state) => state.users.loggedIn);
   const listenScrollEvent = (event) => {
     if (window.scrollY < 48) {
       return setHeader("header");
@@ -84,7 +87,7 @@ function App() {
         />
       );
     });
-
+  const currentUser = useSelector((state) => state.users);
   return (
     <>
       <Navi className={header}>
@@ -132,7 +135,7 @@ function App() {
           <Route
             path="/"
             element={
-              <>
+              <ProtectedPage user={currentUser}>
                 <ListingWrap>
                   <InputComponent addData={addData} />
                   {listing()}
@@ -142,7 +145,7 @@ function App() {
                     onDelete={() => deleteData(id)}
                   />
                 </ListingWrap>
-              </>
+              </ProtectedPage>
             }
           />
           <Route path="/detail" Component={ListDetail} />

@@ -28,7 +28,9 @@ export const InputContainer = styled("form")(() => ({
   },
 }));
 export const ListingContainer = styled("div")((props) => ({
-  background: props.completed ? "#48BF53" : "#FF5252",
+  background: props.completed
+    ? "linear-gradient(90deg, rgba(126,107,254,1) 0%, rgba(39,252,217,1) 100%)"
+    : "linear-gradient(90deg, rgba(255,82,82,1) 0%, rgba(255,137,82,1) 100%)",
   margin: "1rem 0",
   width: "100%",
   padding: "1rem 0 ",

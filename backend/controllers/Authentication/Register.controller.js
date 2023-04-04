@@ -6,7 +6,7 @@ export const SaveUser = async (username, password) => {
   const UserExists = await Users.findOne({ username });
 
   // return if user already exists
-  if (UserExists && !UserExists.length) return;
+  if (UserExists) return;
   const encrypted_password = await encryptPassword(password);
   // if not proceed to register
   const user = new Users({

@@ -1,9 +1,9 @@
 import Users from "./../../database/Schema/Users.schema.js";
 
-export const VerifyLogin = async (username, password) => {
-  const user = await Users.find({ username, password });
+export const VerifyLogin = async (username) => {
+  const user = await Users.findOne({ username });
 
-  if (user && !user.length) return;
+  if (!user) return;
 
   return user;
 };
