@@ -1,6 +1,6 @@
-import Users from "../../database/Schema/Users.schema";
-import { encryptPassword } from "../../services/bcrypt";
-import { VerifyLogin } from "./Login.controller";
+import Users from "../../database/Schema/Users.schema.js";
+import { encryptPassword } from "../../services/bcrypt.js";
+import { VerifyLogin } from "./Login.controller.js";
 
 const RegisterPost = async (req, res) => {
   const { username, password } = req.body;
