@@ -3,10 +3,14 @@ import styled from "@emotion/styled";
 import React, { useState } from "react";
 import axiosBase from "./../axiosBase.js";
 import { Layout } from "./Layout.js";
+import { useDispatch } from "react-redux";
+import { LoginActions } from "../store/slice/UserSlice/User.slice.js";
 
 const LoginComponent = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
+  const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -18,6 +22,10 @@ const LoginComponent = () => {
       username,
       password,
     });
+
+    const token = data.data.token;
+
+    dispatch(LoginActions(token));
   };
 
   return (

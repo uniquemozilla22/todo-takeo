@@ -2,18 +2,23 @@ import { comparePassword, encryptPassword } from "../../services/bcrypt.js";
 import { generateToken } from "../../services/jsonwebtoken.js";
 import Users from "./../../database/Schema/Users.schema.js";
 
-export const VerifyLogin = async (...rest) => {
-  const user = await Users.find({ ...rest });
-  if (!user.length) return;
+export const VerifyLogin = async (username) => {
+  const user = await Users.findOne({ username });
+  if (!user) return;
   return user;
 };
 
 export const LoginPost = async (req, res) => {
-  let { username, password: unecrypted_password } = req.body;
+  let { username, password } = req.body;
+  const user = await VerifyLogin(username);
 
-  let password = await encryptPassword(unecrypted_password);
-  const user = await VerifyLogin(username, password);
-  const isSamePassword = await comparePassword(unecrypted_password, password);
+  if (!user) {
+    res.send({ error: true, status: 404, message: "User Not Found " });
+    return;
+  }
+
+  console.log(user);
+  const isSamePassword = await comparePassword(password, user.password);
 
   if (!isSamePassword) {
     res.send({
@@ -23,11 +28,12 @@ export const LoginPost = async (req, res) => {
     });
   }
 
-  if (!user) {
-    res.send({ error: true, status: 404, message: "User Not Found " });
-    return;
-  }
-  const token = generateToken(user);
+  const token = generateToken({
+    username: user.username,
+    password: user.password,
+    id: user.id,
+  });
+
   res.send({
     error: false,
     status: 200,

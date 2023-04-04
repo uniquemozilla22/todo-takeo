@@ -24,8 +24,6 @@ const RegisterComponent = () => {
       username,
       password,
     });
-
-    console.log(data);
   };
 
   return (
