@@ -18,7 +18,7 @@ const LoginComponent = () => {
   };
 
   const postLogin = async (username, password) => {
-    const { data } = await axiosBase.post("login", {
+    const { data } = await axiosBase().post("login", {
       username,
       password,
     });

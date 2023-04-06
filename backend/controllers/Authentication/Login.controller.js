@@ -16,8 +16,6 @@ export const LoginPost = async (req, res) => {
     res.send({ error: true, status: 404, message: "User Not Found " });
     return;
   }
-
-  console.log(user);
   const isSamePassword = await comparePassword(password, user.password);
 
   if (!isSamePassword) {

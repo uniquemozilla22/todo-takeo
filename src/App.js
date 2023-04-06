@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Listing from "./Components/List.comp.js";
 // import axios from "axios";
 import { InputComponent } from "./Components/Input.comp.js";
@@ -8,9 +8,10 @@ import ListDetail from "./Components/ListDetail.comp.js";
 import { Route, Routes, Link } from "react-router-dom";
 import LoginComponent from "./Components/Login.comp.js";
 import RegisterComponent from "./Components/Register.comp.js";
+import axiosBase from "./axiosBase.js";
 
 function App() {
-  const [data, setData] = useState(MockData);
+  const [data, setData] = useState(null);
 
   const addData = (title) => {
     const newData = {
@@ -37,16 +38,28 @@ function App() {
   };
 
   const listing = () =>
-    data.map((task, index) => {
-      return (
-        <Listing
-          key={index}
-          onDelete={() => deleteData(task.id)}
-          onComplete={() => completeTask(task.id)}
-          {...task}
-        />
-      );
-    });
+    data ? (
+      data.map((task, index) => {
+        return (
+          <Listing
+            key={index}
+            onDelete={() => deleteData(task.id)}
+            onComplete={() => completeTask(task.id)}
+            {...task}
+          />
+        );
+      })
+    ) : (
+      <h1>Loading...</h1>
+    );
+
+  const fetchData = async () => {
+    const { data: response } = await axiosBase().get("todo/getdata");
+    console.log(response);
+    setData([...response.data]);
+  };
+
+  useEffect(() => fetchData, []);
 
   return (
     <BoxTodoContainer>

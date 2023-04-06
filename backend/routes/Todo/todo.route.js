@@ -1,4 +1,5 @@
 import express from "express";
+import isUser from "../../middleware/isUser.middleware.js";
 
 const data = [
   {
@@ -6,6 +7,12 @@ const data = [
     title: "Task 1",
     description: "this is the main task 1",
     completed: true,
+  },
+  {
+    id: 4,
+    title: "Task 4",
+    description: "this is the main task 4",
+    completed: false,
   },
   {
     id: 2,
@@ -25,9 +32,14 @@ const TodoRouter = express.Router();
 
 const returnData = (req, res) => {
   console.log("Hey I am called");
-  res.send(data);
+  res.send({
+    error: false,
+    status: 200,
+    message: "Data Fetched",
+    data,
+  });
 };
 
-TodoRouter.get("/getdata", returnData);
+TodoRouter.get("/getdata", isUser, returnData);
 
 export default TodoRouter;
