@@ -9,26 +9,17 @@ import { Route, Routes, Link } from "react-router-dom";
 import LoginComponent from "./Components/Login.comp.js";
 import RegisterComponent from "./Components/Register.comp.js";
 import axiosBase from "./axiosBase.js";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { LoginActions } from "./store/slice/UserSlice/User.slice.js";
+import { addData, fetchTodo } from "./store/slice/TodoSlice/Todo.slice.js";
 
 function App() {
-  const [data, setData] = useState(null);
-
-  const addData = (title) => {
-    const newData = {
-      id: data.length + 1,
-      title: title,
-      completed: false,
-    };
-    console.log(newData);
-    setData([...data, newData]);
-  };
+  const { data } = useSelector((state) => state.todo);
 
   const deleteData = (id) => {
     let copyData = data;
     let filteredData = copyData.filter((dataTask) => dataTask.id !== id);
-    setData([...filteredData]);
+    //setData([...filteredData]);
   };
 
   const completeTask = (id) => {
@@ -36,7 +27,7 @@ function App() {
     let indexOfTaskToBeCompleted = copyData.findIndex((task) => task.id === id);
     copyData[indexOfTaskToBeCompleted].completed =
       !copyData[indexOfTaskToBeCompleted].completed;
-    setData([...copyData]);
+    //setData([...copyData]);
   };
 
   const listing = () =>
@@ -57,8 +48,7 @@ function App() {
 
   const fetchData = async () => {
     const { data: response } = await axiosBase().get("todo/getdata");
-    console.log(response);
-    setData([...response.data]);
+    dispatch(fetchTodo(response.data));
   };
 
   useEffect(() => fetchData, []);
@@ -82,7 +72,7 @@ function App() {
           path="/"
           element={
             <>
-              <InputComponent addData={addData} />
+              <InputComponent addData={(title) => dispatch(addData(title))} />
               {listing()}
             </>
           }
