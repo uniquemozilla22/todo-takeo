@@ -9,6 +9,8 @@ import { Route, Routes, Link } from "react-router-dom";
 import LoginComponent from "./Components/Login.comp.js";
 import RegisterComponent from "./Components/Register.comp.js";
 import axiosBase from "./axiosBase.js";
+import { useDispatch } from "react-redux";
+import { LoginActions } from "./store/slice/UserSlice/User.slice.js";
 
 function App() {
   const [data, setData] = useState(null);
@@ -50,7 +52,7 @@ function App() {
         );
       })
     ) : (
-      <h1>Loading...</h1>
+      <h1 onClick={fetchData}>Loading...</h1>
     );
 
   const fetchData = async () => {
@@ -61,6 +63,8 @@ function App() {
 
   useEffect(() => fetchData, []);
 
+  const dispatch = useDispatch();
+
   return (
     <BoxTodoContainer>
       <ul>
@@ -69,6 +73,10 @@ function App() {
         <Link to={"/login"}>Login</Link>
         <Link to={"/register"}>Register</Link>
       </ul>
+      <button onClick={fetchData}>Fetch</button>
+      <button onClick={() => dispatch(LoginActions("abcd"))}>
+        Change Login
+      </button>
       <Routes>
         <Route
           path="/"

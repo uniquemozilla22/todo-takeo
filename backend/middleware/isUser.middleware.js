@@ -1,4 +1,5 @@
 import { verifyToken } from "../services/jsonwebtoken.js";
+import Users from "./../database/Schema/Users.schema.js";
 
 const isUser = (req, res, next) => {
   const BearerToken = req.headers["authorization"];
@@ -14,7 +15,20 @@ const isUser = (req, res, next) => {
     return;
   }
   try {
-    const verifyTokenString = verifyToken(token);
+    const { iat, exp, ...rest } = verifyToken(token);
+
+    // Check the the user is correct or not
+
+    const UserInDatabase = Users.findOne({ ...rest });
+
+    if (!UserInDatabase) {
+      res.send({
+        error: true,
+        status: 500,
+        message: "User is not correct  ,Invalid Token: Login again",
+      });
+      return;
+    }
     next();
   } catch (e) {
     res.send({
