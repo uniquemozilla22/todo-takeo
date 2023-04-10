@@ -11,75 +11,73 @@ import RegisterComponent from "./Components/Register.comp.js";
 import axiosBase from "./axiosBase.js";
 import { useDispatch, useSelector } from "react-redux";
 import { LoginActions } from "./store/slice/UserSlice/User.slice.js";
-import { addData, fetchTodo } from "./store/slice/TodoSlice/Todo.slice.js";
+import {
+  addData,
+  fetchData,
+  fetchTodo,
+  deleteTask,
+  completeTask,
+} from "./store/slice/TodoSlice/Todo.slice.js";
 
 function App() {
-  const { data } = useSelector((state) => state.todo);
+  const { data, isLoading } = useSelector((state) => state.todo);
+  const { token } = useSelector((state) => state.users);
 
-  const deleteData = (id) => {
-    let copyData = data;
-    let filteredData = copyData.filter((dataTask) => dataTask.id !== id);
-    //setData([...filteredData]);
-  };
-
-  const completeTask = (id) => {
-    let copyData = data;
-    let indexOfTaskToBeCompleted = copyData.findIndex((task) => task.id === id);
-    copyData[indexOfTaskToBeCompleted].completed =
-      !copyData[indexOfTaskToBeCompleted].completed;
-    //setData([...copyData]);
-  };
-
-  const listing = () =>
-    data ? (
+  const listing = (loader) => {
+    return !loader ? (
       data.map((task, index) => {
         return (
           <Listing
             key={index}
-            onDelete={() => deleteData(task.id)}
-            onComplete={() => completeTask(task.id)}
+            onDelete={() => dispatch(deleteTask(task.id))}
+            onComplete={() => dispatch(completeTask(task.id))}
             {...task}
           />
         );
       })
     ) : (
-      <h1 onClick={fetchData}>Loading...</h1>
+      <h1 onClick={() => dispatch(fetchData())}>Loading...</h1>
     );
-
-  const fetchData = async () => {
-    const { data: response } = await axiosBase().get("todo/getdata");
-    dispatch(fetchTodo(response.data));
   };
 
-  useEffect(() => fetchData, []);
-
+  // const dispatch(fetchData()) = async () => {
+  //   const { data: response } = await axiosBase().get("todo/getdata");
+  //   dispatch(fetchTodo(response.data));
+  // };
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchData());
+  }, [dispatch]);
 
   return (
     <BoxTodoContainer>
       <ul>
         <Link to={"."}>Home</Link>
         <Link to={"/detail"}>Detail</Link>
-        <Link to={"/login"}>Login</Link>
-        <Link to={"/register"}>Register</Link>
+        {!token && (
+          <>
+            <Link to={"/login"}>Login</Link>
+            <Link to={"/register"}>Register</Link>
+          </>
+        )}
       </ul>
-      <button onClick={fetchData}>Fetch</button>
-      <button onClick={() => dispatch(LoginActions("abcd"))}>
-        Change Login
-      </button>
       <Routes>
         <Route
           path="/"
           element={
             <>
               <InputComponent addData={(title) => dispatch(addData(title))} />
-              {listing()}
+              {listing(isLoading)}
             </>
           }
         />
-        <Route path="/detail" Component={ListDetail} />
-        <Route path="/login" Component={LoginComponent} />
-        <Route path="/register" Component={RegisterComponent} />
+        {!token && (
+          <>
+            <Route path="/login" Component={LoginComponent} />
+            <Route path="/register" Component={RegisterComponent} />
+          </>
+        )}
       </Routes>
     </BoxTodoContainer>
   );

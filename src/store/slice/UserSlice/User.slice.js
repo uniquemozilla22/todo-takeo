@@ -9,6 +9,9 @@ const UserSlice = createSlice({
     LoginActions(state, action) {
       state.token = action.payload;
     },
+    LogoutAction(state) {
+      state.token = "";
+    },
   },
 });
 

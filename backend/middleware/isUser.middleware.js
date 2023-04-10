@@ -11,7 +11,7 @@ const isUser = (req, res, next) => {
   const token = splitToken(BearerToken);
 
   if (!token) {
-    res.send(noTokenResponse);
+    res.status(498).send(noTokenResponse);
     return;
   }
   try {
@@ -22,18 +22,18 @@ const isUser = (req, res, next) => {
     const UserInDatabase = Users.findOne({ ...rest });
 
     if (!UserInDatabase) {
-      res.send({
+      res.status(498).send({
         error: true,
-        status: 500,
+        status: 498,
         message: "User is not correct  ,Invalid Token: Login again",
       });
       return;
     }
     next();
   } catch (e) {
-    res.send({
+    res.status(498).send({
       error: true,
-      status: 500,
+      status: 498,
       message: "Could not verify the user , Please login again",
     });
     return;
@@ -44,7 +44,7 @@ const splitToken = (bearer) => bearer?.split(" ")[1] || null;
 
 const noTokenResponse = {
   error: true,
-  status: 500,
+  status: 498,
   message: "Could not verify the user , No token: Login again",
 };
 export default isUser;
